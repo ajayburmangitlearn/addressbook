@@ -1,0 +1,42 @@
+#!groovy    
+/*=======================================
+Auther:Deops
+Date:01/01/2021
+Purpose:To build frontend Java project
+=======================================
+*/
+
+pipeline {
+
+agent{
+    label 'master'
+}
+
+stages {
+    stages('Validate Project')
+            steps{
+
+                        script
+                        {
+
+                        mvn validate
+
+                        }
+                }
+
+         }
+
+         stages('Compile Project')
+            steps{
+
+                        script
+                        {
+
+                        mvn compile
+
+                        }
+                }
+
+         }
+
+}
