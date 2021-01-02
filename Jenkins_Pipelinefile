@@ -30,9 +30,9 @@ pipeline {
 
 									script
 									{
-
-									mvn validate
-
+										sh """
+										mvn validate
+											"""
 									}
 								}
 
@@ -45,9 +45,9 @@ pipeline {
 
 							script
 								{
-
+									sh """
 									mvn compile
-
+										"""
 								}
 							}
 
