@@ -30,7 +30,7 @@ pipeline {
 
 									script
 									{
-										sh """
+										bat """
 										mvn validate
 										echo 'validate completed'
 											"""
@@ -46,7 +46,7 @@ pipeline {
 
 							script
 								{
-									sh """
+									bat """
 									mvn compile
 									echo 'Compile completed'
 										"""
