@@ -61,6 +61,22 @@ pipeline {
 							}
 
 					}
+					
+					stage('Testing')
+					{
+						steps	
+							{
+
+							script
+								{
+									bat """
+									mvn test
+									echo 'test completed'
+										"""
+								}
+							}
+
+					}
 
 			}
 		}
