@@ -23,7 +23,7 @@ pipeline {
 
 		stages 
 			{
-				stage(Code Checkout')
+				stage('Code Checkout')
 				{
 				steps{
 					git credentialsId: 'devops_git_pipeline', url: 'https://github.com/ajayburmangitlearn/addressbook.git'
