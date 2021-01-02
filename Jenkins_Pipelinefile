@@ -32,7 +32,7 @@ pipeline {
 									{
 										sh """
 										mvn validate
-										echo "validate completed"
+										echo 'validate completed'
 											"""
 									}
 								}
@@ -48,7 +48,7 @@ pipeline {
 								{
 									sh """
 									mvn compile
-									echo "Compile completed"
+									echo 'Compile completed'
 										"""
 								}
 							}
