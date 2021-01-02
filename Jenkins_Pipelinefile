@@ -13,7 +13,7 @@ agent{
 }
 
 stages {
-    stages('Validate Project')
+    stage('Validate Project')
             steps{
 
                         script
@@ -26,7 +26,7 @@ stages {
 
          }
 
-         stages('Compile Project')
+         stage('Compile Project')
             steps{
 
                         script
