@@ -1,5 +1,6 @@
-#!groovy    
-/*=======================================
+#!groovy 
+/*
+=======================================
 Auther:Deops
 Date:01/01/2021
 Purpose:To build frontend Java project
@@ -8,35 +9,42 @@ Purpose:To build frontend Java project
 
 pipeline {
 
-agent{
-    label 'master'
-}
+			agent
+			{
+				label 'master'
+			}
 
-stages {
-    stage('Validate Project')
-            steps{
+		stages 
+			{
+				stage('Validate Project')
+					{
+						steps
+								{
 
-                        script
-                        {
+									script
+									{
 
-                        mvn validate
+									mvn validate
 
-                        }
-                }
+									}
+								}
 
-        
+			
+					}
+			 stage('Compile Project')
+					{
+						steps	
+							{
 
-         stage('Compile Project')
-            steps{
+							script
+								{
 
-                        script
-                        {
+									mvn compile
 
-                        mvn compile
+								}
+							}
 
-                        }
-                }
+					}
 
-         }
-
-}
+			}
+		}
