@@ -1,0 +1,66 @@
+#!groovy 
+/*
+=======================================
+Auther:Deops
+Date:01/01/2021
+Purpose:To build frontend Java project
+=======================================
+*/
+
+pipeline {
+
+			agent
+			{
+				label 'master'
+			}
+			
+			tools 
+			{
+
+					 maven 'mymaven'
+					 jdk 'java11'
+			 }
+
+		stages 
+			{
+				stage('Code Checkout')
+				{
+				steps{
+					git credentialsId: 'devops_git_pipeline', url: 'https://github.com/ajayburmangitlearn/addressbook.git'
+					}
+				}
+			
+				stage('Validate Project')
+					{
+						steps
+								{
+
+									script
+									{
+										bat """
+										mvn validate
+										echo 'validate completed'
+											"""
+									}
+								}
+
+			
+					}
+			 stage('Compile Project')
+					{
+						steps	
+							{
+
+							script
+								{
+									bat """
+									mvn compile
+									echo 'Compile completed'
+										"""
+								}
+							}
+
+					}
+
+			}
+		}
