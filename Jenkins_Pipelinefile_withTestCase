@@ -26,7 +26,7 @@ pipeline {
 				stage('Code Checkout')
 				{
 				steps{
-					git branch: 'main', credentialsId: 'devops_git_pipeline', url: 'https://github.com/devopstrainers1/spring-petclinic.git'
+					git branch: 'main', credentialsId: 'devops_git_pipeline', url: 'https://github.com/devopstrainers1/addressbook.git'
 					}
 				}
 			
@@ -86,6 +86,14 @@ pipeline {
 						always
 						{
 						emailext body: 'devops extented email testing', recipientProviders: [developers()], subject: 'devops extented email ', to: 'mail2.kumarajay@gmail.com'	
+						dir("${env.WORKSPACE}@tmp")
+						{
+						deleteDir()
 						}
+						}
+						
+					
+					
+					
 					}
 		}
