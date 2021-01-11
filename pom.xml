@@ -98,7 +98,7 @@
         </plugins>
 		
 		
-		<plugins>
+	
  <plugin>
    <artifactId>maven-deploy-plugin</artifactId>
      <version>3.6.3</version>
@@ -135,7 +135,7 @@
    </executions>
    </plugin>
 
-</plugins>
+
  </build>
   <distributionManagement>
    <repository>
