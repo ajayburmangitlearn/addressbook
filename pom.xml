@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -66,21 +67,7 @@
     </dependencies>
 
     <build>
-	
         <plugins>
-		<plugin>
-    <artifactId>maven-war-plugin</artifactId>
-    <configuration>
-        <attachClasses>true</attachClasses>
-        <webXml>target/web.xml</webXml>
-        <webResources>
-            <resource>
-                <directory>src/main/webapp</directory>
-                <filtering>true</filtering>
-            </resource>
-        </webResources>
-    </configuration>
-</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,59 +83,5 @@
                 <version>9.2.3.v20140905</version>
             </plugin>
         </plugins>
-		
-		
-	
- <plugin>
-   <artifactId>maven-deploy-plugin</artifactId>
-     <version>3.6.3</version>
-       <executions>
-                 <execution>
-                    <id>default-deploy</id>
-                    <configuration>
-                        <skip>true</skip>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>deploy-node-modules-artifact</id>
-                    <phase>deploy</phase>
-                    <goals>
-                        <goal>deploy-file</goal>
-                    </goals>
-
-                </execution>
-            </executions>
-        </plugin>
-           <plugin>
-		   <artifactId>maven-antrun-plugin</artifactId>
-                 <executions>
-             <execution>
-               <id>copy_package</id>
-                  <phase>install</phase>
-             <goals>
-   <goal>run</goal>
-   </goals>
-   <configuration>
- 
- </configuration>
-         </execution>
-   </executions>
-   </plugin>
-
-
- </build>
-  <distributionManagement>
-   <repository>
-    <id>central</id>
-    <name>plugins-releases</name>
-    <url>http://localhost:8081/artifactory/plugins-release-local</url>
-   </repository>
-    <snapshotRepository>
-    <id>snapshots</id>
-    <name>plugins-snapshot</name>
-    <url>http://localhost:8081/artifactory/plugins-snapshot-local</url>
-    </snapshotRepository>
-      </distributionManagement>
-		
-	
+    </build>
 </project>
