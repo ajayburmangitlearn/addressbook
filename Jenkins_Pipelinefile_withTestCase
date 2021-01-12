@@ -127,7 +127,7 @@ post
 					{
 						always
 						{
-						emailext body: 'devops extented email testing', recipientProviders: [developers()], subject: 'devops extented email ', to: 'mail2.kumarajay@gmail.com'	
+						
 						dir("${env.WORKSPACE}@tmp")
 						{
 						deleteDir()
