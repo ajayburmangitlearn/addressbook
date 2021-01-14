@@ -99,10 +99,29 @@ stage('Create Zip') {
 					artifactId = "development"
 					artifactdir = "${env.WORKSPACE}/target/"
 					artifactfile = "FrontEnd"
+					groupid = "${env.GIT_BRANCH}"
+					version="${env.GIT_COMMIT}"
 					
 					
-					nexusArtifactUploader artifacts: [[artifactId: artifactId, , file: artifactdir + artifactfile + '.zip', type: 'zip']], credentialsId: 'nexus_ID', groupId: '${GIT_BRANCH}', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'https', repository: 'devops_nexus_repo', version: '${GIT_COMMIT}'
-				  
+					nexusArtifactUploader 
+					(
+					
+					nexusVersion: 'nexus3',
+					protocol: 'http',
+					version: "${version}",
+					groupId: "${groupid}",
+					credentialsId: 'nexus_ID',
+					repository: 'devops_nexus_repo',
+					nexusUrl: 'localhost:8081',
+					
+					
+					artifacts: [
+									[
+									artifactId: artifactId, , file: artifactdir + artifactfile + '.zip', type: 'zip'
+									]
+					
+							]
+					);
 					}
 				}
 
