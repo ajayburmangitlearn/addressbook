@@ -1,0 +1,153 @@
+#!groovy
+/*
+=======================================
+Author: DevOps
+Date: 05/12/2020
+Purpose: To build frontend java project
+=======================================
+*/
+
+pipeline {
+ 
+ agent {
+
+     label 'master'
+ }
+ 
+ tools {
+
+     maven 'mymaven'
+     jdk 'java11'
+ }
+
+ stages {
+ 
+	stage ('Code Checkout'){
+	steps {
+	git credentialsId: 'devops_git', url: 'https://github.com/devopstrainers1/addressbook.git'
+	}
+	}
+
+     stage('Validate Project') {
+     steps {
+
+         script{
+			
+			sh """
+             mvn validate
+			 
+			 """
+         }
+     }
+     }
+
+     stage('Code Compile') {
+     steps {
+
+         script{
+			
+			sh """
+             mvn compile
+			 """
+         }
+     }
+     }
+
+    stage('Code Test') {
+    steps {
+        script{
+			
+			sh """
+             mvn test
+			 """
+         }
+
+    }
+}
+
+stage('Package') {
+    steps {
+        script{
+			
+			sh """
+             mvn package
+			 """
+         }
+
+    }
+}
+
+stage('Create Zip') {
+    steps {
+        script{
+			
+			sh """
+             cd "${env.WORKSPACE}/target/"
+             zip FrontEnd.zip addressbook-2.0.war
+			 """
+         }
+
+    }
+}
+
+		stage ('Publish to Nexus')
+		{
+
+			steps{
+
+				script {
+					artifactId = "development"
+					artifactdir = "${env.WORKSPACE}/target/"
+					artifactfile = "FrontEnd"
+					groupid = "${env.GIT_BRANCH}"
+					version="${env.GIT_COMMIT}"
+					
+					
+					nexusArtifactUploader 
+					(
+					
+					nexusVersion: 'nexus3',
+					protocol: 'http',
+					version: "${version}",
+					groupId: "${groupid}",
+					credentialsId: 'nexus_ID',
+					repository: 'devops_nexus_repo',
+					nexusUrl: 'localhost:8081',
+					
+					
+					artifacts: [
+									[
+									artifactId: artifactId, , file: artifactdir + artifactfile + '.zip', type: 'zip'
+									]
+					
+							]
+					);
+					}
+				}
+
+
+								
+								
+		}
+ }
+
+ 
+post
+					{
+						always
+						{
+						emailext body: 'devops extented email testing', recipientProviders: [developers()], subject: 'devops extented email ', to: 'mail2.kumarajay@gmail.com'	
+						dir("${env.WORKSPACE}@tmp")
+						{
+						deleteDir()
+						}
+						}
+						
+					
+					
+					
+					}
+	 
+}
+
+ 
