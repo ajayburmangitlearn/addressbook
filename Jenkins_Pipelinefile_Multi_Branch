@@ -11,7 +11,7 @@ pipeline {
  
  agent {
 
-     label 'win_slave'
+     label 'master'
  }
  
  tools {
@@ -24,7 +24,7 @@ pipeline {
  
 	stage ('Code Checkout'){
 	steps {
-	git credentialsId: 'devops_git', url: 'https://github.com/ajayburmangitlearn/addressbook.git'
+	git credentialsId: 'devops_git_Multi_Branch', url: 'https://github.com/ajayburmangitlearn/addressbook.git'
 	}
 	}
 
@@ -33,7 +33,7 @@ pipeline {
 
          script{
 			
-			sh """
+			bat """
              mvn validate
 			 
 			 """
@@ -46,7 +46,7 @@ pipeline {
 
          script{
 			
-			sh """
+			bat """
              mvn compile
 			 """
          }
@@ -57,7 +57,7 @@ pipeline {
     steps {
         script{
 			
-			sh """
+			bat """
              mvn test
 			 """
          }
@@ -69,7 +69,7 @@ stage('Package') {
     steps {
         script{
 			
-			sh """
+			bat """
              mvn package
 			 """
          }
@@ -81,24 +81,24 @@ stage('Create Zip') {
     steps {
         script{
 			
-			sh """
+			bat """
              cd "${env.WORKSPACE}/target/"
-             zip FrontEnd.zip addressbook-2.0.war
+             zip FrontEndNew.zip addressbook-2.0.war
 			 """
          }
 
     }
 }
 
-		stage ('Publish to Nexus')
+		stage ('Publibat to Nexus')
 		{
 
 			steps{
 
 				script {
-					artifactId = "development"
+					artifactId = "Slave"
 					artifactdir = "${env.WORKSPACE}/target/"
-					artifactfile = "FrontEnd"
+					artifactfile = "FrontEndNew"
 					groupid = "${env.BRANCH_NAME}"
 					version="${env.GIT_COMMIT}"
 					
